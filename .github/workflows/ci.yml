@@ -1,0 +1,34 @@
+name: Lint and test app
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-26.04
+
+    steps:
+    - uses: actions/checkout@v7
+    - name: Set up Python Environment
+      run: |
+        sudo apt update -y
+        sudo apt install -y python3.14-venv
+        python3.14 -m venv venv
+        source venv/bin/activate
+        python -m pip install --upgrade pip
+    - name: Install requirements
+      if: hashFiles('requirements.txt') != ''
+      run: pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: flake8 app tests
+
+    - name: Test with pytest
+      run: pytest -v tests
