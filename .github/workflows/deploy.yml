@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
- STATE_FILE: "terraform.tfstate"
+ STATE_FILE: "Terraform/terraform.tfstate"
 
 jobs:
   plan_and_deploy:
@@ -13,7 +13,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: terraform
+        working-directory: Terraform
 
     steps:
     # Checkout the repository to the GitHub Actions runner
