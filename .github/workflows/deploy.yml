@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
- STATE_FILE: "Terraform/terraform.tfstate"
+ STATE_FILE: "terraform.tfstate"
 
 jobs:
   plan_and_deploy:
@@ -13,7 +13,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: Terraform
+        working-directory: terraform
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -44,8 +44,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
-    - name: Save current Terraform deployment state (if file has chaged)
-      if: hashFiles('Terraform/terraform.tfstate') != ''
+    - name: Save current Terraform deployment state (if file has changed)
+      if: hashFiles(env.STATE_FILE) != ''
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
