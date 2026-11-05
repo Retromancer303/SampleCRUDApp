@@ -4,7 +4,7 @@ set -euxo pipefail
 apt-get update -y
 apt-get install -y python3-venv python3-pip git
 
-git clone https://github.com/MystrY07/sampleCRUDapp.git /opt/sampleCRUDapp
+git clone https://github.com/Retromancer303/sampleCRUDapp.git /opt/sampleCRUDapp
 cd /opt/sampleCRUDapp/backend
 
 python3 -m venv /opt/crud-venv
