@@ -8,9 +8,7 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region                   = var.aws_region
-  shared_credentials_files = ["C:/.aws/credentials"]
-  profile                  = "default"
+  region = var.aws_region
 }
 
 # Fetch the EC2 Instance Connect IP range
@@ -67,6 +65,6 @@ resource "aws_instance" "server" {
 
 # Output the public IP address
 output "public_ip" {
-  value       = "${aws_instance.server.public_ip}"
+  value       = aws_instance.server.public_ip
   description = "The public IP of your application"
 }
