@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
- STATE_FILE: "terraform.tfstate"
+ STATE_FILE: "Terraform/terraform.tfstate"
 
 jobs:
   plan_and_deploy:
@@ -45,7 +45,7 @@ jobs:
         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
     - name: Save current Terraform deployment state (if file has chaged)
-      if: hashFiles('terraform/terraform.tfstate') != ''
+      if: hashFiles('Terraform/terraform.tfstate') != ''
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
